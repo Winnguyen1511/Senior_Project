@@ -47,7 +47,7 @@ namespace Doctor_Appointment.Controllers
         public ISecureDataFormat<AuthenticationTicket> AccessTokenFormat { get; private set; }
 
         //Post api/Account/Register
-        [Route("api/Account/Register")]
+        [Route("api/Auth/Register")]
         [HttpPost]
         [AllowAnonymous]
         public async Task<IHttpActionResult> Register(UserForRegisterDTO userForRegisterDTO)
@@ -100,48 +100,7 @@ namespace Doctor_Appointment.Controllers
         }      
 
 
-        //Post api/Account/Login
-        [Route("api/Account/Login")]
-        [HttpPost]
-        [AllowAnonymous]
-        public async Task<IHttpActionResult> Login(UserForLoginDTO userForLoginDTO)
-        {
-
         
-            UserForLoginDTO loginrequest = new UserForLoginDTO { };
-            loginrequest.Username = userForLoginDTO.Username.ToLower();
-            loginrequest.Password = userForLoginDTO.Password;
-
-
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            var user = await UserManager.FindByNameAsync(userForLoginDTO.Username);
-
-            var checkPassword = await UserManager.CheckPasswordAsync(user,userForLoginDTO.Password);
-
-           string access_token = JwtManager.GenerateToken1(userForLoginDTO.Username);
-            if (user == null)
-            {
-                return Content(HttpStatusCode.NotFound, "Ivalid Username");
-            }
-
-            if (!checkPassword)
-            {
-                return Content(HttpStatusCode.NotFound, "Ivalid Password");
-            }
-
-
-
-            return Ok(new
-            {
-                Username = user.UserName,
-                token = access_token
-            });
-        }
-
         [Authorize]
         [HttpPost]
         [Route("api/Account/ChangePassword")]

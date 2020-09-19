@@ -141,13 +141,13 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\ResourceController.cs" />
     <Compile Include="DTO\UserForChangePasswordDTO.cs" />
     <Compile Include="DTO\UserForLoginDTO.cs" />
     <Compile Include="DTO\UserForRegisterDTO.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="JwtManager.cs" />
     <Compile Include="Migrations\202009150225233_InitialDB.cs" />
     <Compile Include="Migrations\202009150225233_InitialDB.designer.cs">
       <DependentUpon>202009150225233_InitialDB.cs</DependentUpon>
